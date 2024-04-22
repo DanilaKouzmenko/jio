@@ -11,8 +11,8 @@
       "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "jio.ts",
-        "object.ts",
-        "assets.ts"
+        "src/jio.ts",
+        "src/object.ts",
+        "src/assets.ts"
     ]
   }
