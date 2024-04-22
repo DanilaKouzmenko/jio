@@ -1,5 +1,5 @@
 {
-    "name": "jio",
+    "name": "jio-engine",
     "version": "1.0.0",
     "description": "Game library for JavaScript",
     "main": "jio.ts",

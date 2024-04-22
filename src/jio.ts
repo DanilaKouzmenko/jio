@@ -12,7 +12,7 @@ export class Game{
     favicon : string;
     
     constructor( html_document : Document,
-        title : string = "JIO",
+        title : string = "JIO Engine Project",
         screen_size : pos = new pos(800, 600),
         favicon : string = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true',
     ){

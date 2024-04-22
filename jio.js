@@ -4,7 +4,7 @@ exports.Scene = exports.Game = void 0;
 var object_js_1 = require("./object.js");
 var Game = /** @class */ (function() {
     function Game(html_document, title, screen_size, favicon) {
-        if (title === void 0) { title = "JIO"; }
+        if (title === void 0) { title = "JIO Engine Project"; }
         if (screen_size === void 0) { screen_size = new object_js_1.pos(800, 600); }
         if (favicon === void 0) { favicon = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true'; }
         this.scenes = {};
