@@ -6,7 +6,7 @@ var Game = /** @class */ (function() {
     function Game(html_document, title, screen_size, favicon) {
         if (title === void 0) { title = "JIO"; }
         if (screen_size === void 0) { screen_size = new object_js_1.pos(800, 600); }
-        if (favicon === void 0) { favicon = 'https://github.com/DanilaKouzmenko/jio_empty_project/blob/main/assets/favicon.png?raw=true'; }
+        if (favicon === void 0) { favicon = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true'; }
         this.scenes = {};
         this.html = html_document;
         this.canvas = null;
@@ -39,7 +39,7 @@ var Game = /** @class */ (function() {
         if (this.favicon != '') {
             favicon.href = this.favicon;
         } else {
-            favicon.href = "https://github.com/DanilaKouzmenko/jio_empty_project/blob/main/assets/favicon.png?raw=true";
+            favicon.href = "https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true";
         }
         head.appendChild(meta1);
         head.appendChild(title);

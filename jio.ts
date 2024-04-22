@@ -14,7 +14,7 @@ export class Game{
     constructor( html_document : Document,
         title : string = "JIO",
         screen_size : pos = new pos(800, 600),
-        favicon : string = 'https://github.com/DanilaKouzmenko/jio_empty_project/blob/main/assets/favicon.png?raw=true',
+        favicon : string = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true',
     ){
         this.html = html_document;
         this.canvas = null;
@@ -50,7 +50,7 @@ export class Game{
                 favicon.href = this.favicon
             }
             else {
-                favicon.href = "https://github.com/DanilaKouzmenko/jio_empty_project/blob/main/assets/favicon.png?raw=true"
+                favicon.href = "https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true"
             }
             head.appendChild(meta1);
             head.appendChild(title);
