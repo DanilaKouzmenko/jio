@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "module": "commonjs",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "allowImportingTsExtensions" : true,
+      "noEmit": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "jio.ts",
+        "object.ts",
+        "assets.ts"
+    ]
+  }

@@ -1,0 +1,12 @@
+{
+    "name": "jio",
+    "version": "1.0.0",
+    "description": "Game library for JavaScript",
+    "main": "jio.ts",
+    "scripts": {},
+    "author": "Danila Mint",
+    "license": "MIT",
+    "dependencies": {
+        "typescript": "^5.4.5"
+    }
+}
