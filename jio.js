@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Scene = exports.Game = void 0;
 var object_js_1 = require("./object.js");
-var Game = /** @class */ (function() {
-    function Game(html_document, title, screen_size, favicon) {
+var Game = /** @class */ (function () {
+    function Game(html_document, title, screen_size, favicon, main_script_name) {
         if (title === void 0) { title = "JIO Engine Project"; }
         if (screen_size === void 0) { screen_size = new object_js_1.pos(800, 600); }
         if (favicon === void 0) { favicon = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true'; }
+        if (main_script_name === void 0) { main_script_name = 'main.js'; }
         this.scenes = {};
         this.html = html_document;
         this.canvas = null;
@@ -15,8 +16,9 @@ var Game = /** @class */ (function() {
         this.title = title;
         this.screen_size = screen_size;
         this.favicon = favicon;
+        this.script_name = main_script_name;
     }
-    Game.prototype.initHTML = function() {
+    Game.prototype.initHTML = function () {
         var old_head = this.html.querySelector('head');
         var old_body = this.html.querySelector('body');
         old_head === null || old_head === void 0 ? void 0 : old_head.remove();
@@ -30,7 +32,7 @@ var Game = /** @class */ (function() {
         title.innerHTML = this.title;
         var script = this.html.createElement('script');
         script.type = "module";
-        script.src = "main.ts";
+        script.src = this.script_name;
         var style = this.html.createElement('style');
         style.innerHTML = ".hidden{ display:none; }body{ margin:0; }";
         var favicon = this.html.createElement('link');
@@ -38,7 +40,8 @@ var Game = /** @class */ (function() {
         favicon.type = "image/x-icon";
         if (this.favicon != '') {
             favicon.href = this.favicon;
-        } else {
+        }
+        else {
             favicon.href = "https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true";
         }
         head.appendChild(meta1);
@@ -63,27 +66,24 @@ var Game = /** @class */ (function() {
         document.appendChild(head);
         document.appendChild(body);
     };
-    Game.prototype.addScene = function(name, scene) {
+    Game.prototype.addScene = function (name, scene) {
         this.scenes[name] = scene;
     };
     return Game;
 }());
 exports.Game = Game;
-var Scene = /** @class */ (function() {
-    function Scene() {
-        this.layers = [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ];
+var Scene = /** @class */ (function () {
+    function Scene(cam) {
+        this.layers = [[], [], [], [], [], [], [], [], [], []];
+        this.camera = cam;
     }
+    Scene.prototype.addObject = function (object, layer) {
+        if (layer === void 0) { layer = 0; }
+        this.layers[layer].push(object);
+    };
+    Scene.prototype.renderScene = function () {
+        this.camera.render(this.layers);
+    };
     return Scene;
 }());
 exports.Scene = Scene;

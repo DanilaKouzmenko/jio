@@ -1,4 +1,4 @@
-import {GameObject, pos} from './object.js';
+import {GameObject, pos, Camera} from './object.js';
 
 export class Game{
     html : Document;
@@ -10,11 +10,13 @@ export class Game{
     title : string;
     screen_size : pos;
     favicon : string;
+    script_name : string;
     
     constructor( html_document : Document,
         title : string = "JIO Engine Project",
         screen_size : pos = new pos(800, 600),
         favicon : string = 'https://github.com/DanilaKouzmenko/jio/blob/main/favicon.jpg?raw=true',
+        main_script_name : string = 'main.js'
     ){
         this.html = html_document;
         this.canvas = null;
@@ -23,6 +25,7 @@ export class Game{
         this.title = title;
         this.screen_size = screen_size;
         this.favicon = favicon;
+        this.script_name = main_script_name;
     }
 
     initHTML(){
@@ -40,7 +43,7 @@ export class Game{
             title.innerHTML = this.title;
             const script = this.html.createElement('script');
             script.type = "module";
-            script.src = "main.ts";
+            script.src = this.script_name;
             const style = this.html.createElement('style');
             style.innerHTML = ".hidden{ display:none; }body{ margin:0; }";
             const favicon = this.html.createElement('link');
@@ -84,7 +87,14 @@ export class Game{
 
 export class Scene{
     layers : GameObject[][] = [[], [], [], [], [], [], [], [], [], []];
-    constructor(){
-        
+    camera : Camera;
+    constructor(cam : Camera){
+        this.camera = cam;
+    }
+    addObject( object : GameObject, layer : number = 0 ){
+        this.layers[layer].push(object);
+    }
+    renderScene(){
+        this.camera.render( this.layers );
     }
 }

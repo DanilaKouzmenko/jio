@@ -2,6 +2,7 @@
 export class pos{
     x : number;
     y : number;
+    type : string = "pos";
     constructor( x : number, y : number ){
         this.x = x;
         this.y = y;
@@ -12,10 +13,28 @@ export class pos{
     static ones(){
         return new pos(1,1);
     }
+
+    add( other : number | pos ){
+        if (typeof other == 'number'){
+            return new pos( this.x + other, this.y + other );
+        }
+        else if (other.type == 'pos'){
+            return new pos( this.x + other.x, this.y + other.y );
+        }
+    }
+
+    sub(other : number | pos){
+        if (typeof other == 'number'){
+            return this.add( -other )
+        }
+        else if (other.type == 'pos'){
+            return new pos( this.x - other.x, this.y - other.y );
+        }
+    }
 }
 
 export class GameObject{
-    scripts : { [key : string] : any } = {};
+    scripts : { [key : string] : Function } = {}; 
     textures : { [key : string] : HTMLImageElement } = {};
     position : pos;
     rotation : number = 0;
@@ -23,13 +42,17 @@ export class GameObject{
     children : GameObject[] = [];
     show : boolean = true;
     texture_now : string = '';
-    constructor( x:number,y:number ){
+    data : { [key : string] : any } = {};
+    sounds : { [key : string] : HTMLAudioElement } = {};
+    constructor( x:number, y:number ){
         this.position = new pos(x, y);
+    }
+    useScript( key : string ){
+        this.scripts[key]( this );
     }
 }
 
 export class Camera{
-    scripts : { [key : string] : any } = {};
     position : pos = pos.zeros();
     ctx : CanvasRenderingContext2D;
     standart_color : string = "black";
@@ -48,10 +71,10 @@ export class Camera{
                     const texture = object.textures[object.texture_now]
                     this.ctx.drawImage(
                         texture,
-                        object.position.x - this.position.x, 
-                        object.position.y - this.position.y,
-                        texture.width * object.scale.x,
-                        texture.width * object.scale.y
+                        Math.round(object.position.x - this.position.x), 
+                        Math.round(object.position.y - this.position.y),
+                        Math.round(texture.width * object.scale.x),
+                        Math.round(texture.height * object.scale.y)
                     );
                 }
             }

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Camera = exports.GameObject = exports.pos = void 0;
 var pos = /** @class */ (function () {
     function pos(x, y) {
+        this.type = "pos";
         this.x = x;
         this.y = y;
     }
@@ -11,6 +12,22 @@ var pos = /** @class */ (function () {
     };
     pos.ones = function () {
         return new pos(1, 1);
+    };
+    pos.prototype.add = function (other) {
+        if (typeof other == 'number') {
+            return new pos(this.x + other, this.y + other);
+        }
+        else if (other.type == 'pos') {
+            return new pos(this.x + other.x, this.y + other.y);
+        }
+    };
+    pos.prototype.sub = function (other) {
+        if (typeof other == 'number') {
+            return this.add(-other);
+        }
+        else if (other.type == 'pos') {
+            return new pos(this.x - other.x, this.y - other.y);
+        }
     };
     return pos;
 }());
@@ -24,14 +41,18 @@ var GameObject = /** @class */ (function () {
         this.children = [];
         this.show = true;
         this.texture_now = '';
+        this.data = {};
+        this.sounds = {};
         this.position = new pos(x, y);
     }
+    GameObject.prototype.useScript = function (key) {
+        this.scripts[key](this);
+    };
     return GameObject;
 }());
 exports.GameObject = GameObject;
 var Camera = /** @class */ (function () {
     function Camera(canvas_context, standart_color) {
-        this.scripts = {};
         this.position = pos.zeros();
         this.standart_color = "black";
         this.ctx = canvas_context;
@@ -48,7 +69,7 @@ var Camera = /** @class */ (function () {
                 }
                 else {
                     var texture = object.textures[object.texture_now];
-                    this.ctx.drawImage(texture, object.position.x - this.position.x, object.position.y - this.position.y, texture.width * object.scale.x, texture.width * object.scale.y);
+                    this.ctx.drawImage(texture, Math.round(object.position.x - this.position.x), Math.round(object.position.y - this.position.y), Math.round(texture.width * object.scale.x), Math.round(texture.height * object.scale.y));
                 }
             }
         }
