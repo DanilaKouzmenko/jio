@@ -2,10 +2,10 @@
     "name": "jio-engine",
     "version": "1.0.1",
     "description": "Game library for JavaScript",
-    "main": "jio.ts",
+    "main": "main.js",
     "scripts": {},
     "author": "Danila Mint",
-    "license": "MIT",
+    "license": "ISC",
     "dependencies": {
         "typescript": "^5.4.5"
     },
